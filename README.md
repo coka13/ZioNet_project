@@ -20,10 +20,13 @@
  2.  Get results.
 
 ![](https://i.imgur.com/IhOmHS0.png)
+
 **For updating todo status**
 1. Send http://localhost:3002/todos/status POST request using POSTMAN.
 2. Get results.
+
 ![](https://i.imgur.com/GjItw06.png)
 
 **CLIENT**
+
 ![20240621-1107-58.2730459.mp4 [video-to-gif output image]](https://s7.ezgif.com/tmp/ezgif-7-ec85f5866e.gif)
