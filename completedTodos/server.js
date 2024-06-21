@@ -1,11 +1,18 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import axios from 'axios';
+import cors from 'cors';
+
 
 const app = express();
 const port = 3001;
 
+
 app.use(express.json());
+app.use(cors({
+  origin: 'http://localhost:5173', 
+}));
+
 
 // Connect to MongoDB
 try{
@@ -19,6 +26,7 @@ catch(err){
 
 // Endpoint to fetch statistics of completed todos
 app.get('/todos/stats', async (req, res) => {
+  console.log(req.body)
   try {
     // Fetch all todos from the first microservice
     const response = await axios.get('http://localhost:3000/todos');
@@ -30,11 +38,12 @@ app.get('/todos/stats', async (req, res) => {
     // Calculate incomplete todos
     const incompleteCount = todos.filter(todo => !todo.completed).length;
 
-    // Construct and send the response
-    const stats = {
-      completedTodos: completedCount,
-      incompleteTodos: incompleteCount,
-    };
+ const  stats = {
+    completedTodos: completedCount,
+    incompleteTodos: incompleteCount,
+  };
+
+
 
     res.json(stats);
   } catch (error) {
