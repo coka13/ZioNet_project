@@ -26,4 +26,4 @@
 ![](https://i.imgur.com/GjItw06.png)
 
 **CLIENT**
-![](https://s7.ezgif.com/tmp/ezgif-7-a02dbc1e25-poster.jpg)
+![20240621-1107-58.2730459.mp4 [video-to-gif output image]](https://s7.ezgif.com/tmp/ezgif-7-ec85f5866e.gif)
