@@ -43,9 +43,12 @@ app.get('/todos/stats', async (req, res) => {
     incompleteTodos: incompleteCount,
   };
 
-
-
+  if (response.status === 200) {
+    res.status(200).json(stats);
+  } else {
     res.json(stats);
+  }
+
   } catch (error) {
     console.error('Error occurred:', error.message);
     res.status(500).json({ error: 'An error occurred while fetching ToDo statistics' });

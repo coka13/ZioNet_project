@@ -25,7 +25,13 @@ catch(err){
 app.get('/todos', async (req, res) => {
   try {
     const todos = await Todo.find();
-    res.json(todos);
+    if(!todos){
+      return res.status(404).json({ error: 'Todos not found' });
+    }
+    else{
+      res.json(todos);
+      return res.status(200)
+    }
   } catch (error) {
     console.error('Error retrieving Todos:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -38,8 +44,14 @@ app.put('/update-todo', async (req, res) => {
   console.log(req.body)
   try {
     const { id, completed } = req.body;
-    await Todo.findByIdAndUpdate  (id, { completed }); 
-    res.json({ message: 'Todo status updated' });
+    const todo=await Todo.findByIdAndUpdate  (id, { completed }); 
+    if(!todo){
+      return res.status(404).json({ error: 'Todo not found' });
+    }
+    else{
+      res.json({ message: 'Todo status updated' });
+      return res.status(200)
+    }
   } catch (error) { 
     console.error('Error updating Todo status:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });

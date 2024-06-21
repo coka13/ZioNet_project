@@ -34,8 +34,11 @@ app.post("/todos/status/:id", async (req, res) => {
       completed: completed,
     });
 
-    // Return the response from the other microservice
-    res.json(response.data);
+    if (response.status === 200) {
+      res.status(200).json(response.data);
+    } else {
+      res.json(response.data);
+    }
   } catch (err) {
     console.error('Error occurred:', err.message);
     res.status(500).json({ error: 'An error occurred while updating ToDo status' });
