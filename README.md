@@ -23,6 +23,7 @@
  2.  Get results.
 
 ![](https://i.imgur.com/iznA2zI.png)
+
 **For updating todo status**
 1. Send http://localhost:3002/todos/status POST request using POSTMAN.
 2. Get results.
