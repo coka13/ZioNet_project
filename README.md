@@ -13,7 +13,7 @@
 
 **INSTRUCTIONS**
 1. Run CreateDB.js to create the DB on MongoDB.
-2. Start server on each microserver by running the command "npm start server".
+2. Start server on each microservice by running the command "npm start server".
 3. If you want to use client interface start client by running the command "npm run dev"
 
 **POSTMAN:**
