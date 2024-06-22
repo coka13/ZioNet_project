@@ -20,13 +20,13 @@
 
 **For computing how many todos are completed/incompled**
 
- 1. Send http://localhost:3001/todos/stats GET request using POSTMAN.
+ 1. Send http://localhost:3001/api/todos/stats GET request using POSTMAN.
  2.  Get results.
 
 ![](https://i.imgur.com/iznA2zI.png)
 
 **For updating todo status**
-1. Send http://localhost:3002/todos/status POST request using POSTMAN.
+1. Send http://localhost:3002/api/todos/status POST request using POSTMAN.
 2. Get results.
 
 ![](https://i.imgur.com/8Onz5iL.png)
