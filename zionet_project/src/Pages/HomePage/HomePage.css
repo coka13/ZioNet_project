@@ -1,0 +1,27 @@
+.todo {
+  display: flex;
+  flex-direction: row;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.head{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

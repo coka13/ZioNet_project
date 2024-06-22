@@ -1,5 +1,7 @@
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './HomePage.css';
 
 const HomePage = () => {
   const queryClient = useQueryClient();
@@ -95,24 +97,33 @@ const HomePage = () => {
   }
 
   return (
-    <div>
-      <h1>Todo list</h1>
+    <div className="todo-list">
+
 
       {todosStats && allTodos && (
-        <div>
+        <div className="head">
+           <h1>Todo list</h1>
           <div>
-            <p>Completed Todos: {todosStats.completedTodos}</p>
-            <p>Incomplete Todos: {todosStats.incompleteTodos}</p>
+            <h6 className="green">Completed Todos: {todosStats.completedTodos}</h6>
+            <h6 className="red">Incomplete Todos: {todosStats.incompleteTodos}</h6>
+            
           </div>
-          <div>
-            <h2>All Todos</h2>
-            <ul>
+            
+            <ul class="list-group">
               {allTodos.length > 0 ? (
-                allTodos.map(todo => (
-                  <li key={todo._id}>
-                    <p>{todo.task}</p>
-                    <p>Completed: {todo.completed ? 'Yes' : 'No'}</p>
-                    <button onClick={() => handleToggleCompleted(todo._id, todo.completed)}>
+                allTodos.map((todo,index) => (
+                  <li style={{display:"flex",flexDirection:"column",alignItems:"center",border:"solid"}} class="list-group-item" key={todo._id}>
+
+
+                {todo.completed&& <h5 className="task" ><del> {todo.task}</del></h5>}
+                {!todo.completed && <h5 className="task" >{todo.task}</h5>}
+                    
+
+                    <div className="todo">
+
+                    <h6 className={todo.completed? "green" :"red"}> {todo.completed ? 'Completed' : 'Incomplete'}</h6>
+                    </div>
+                    <button type="button"  class={todo.completed ? "btn btn-danger btn-sm":"btn btn-success btn-sm"} onClick={() => handleToggleCompleted(todo._id, todo.completed)}>
                       {todo.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
                     </button>
                   </li>
@@ -122,7 +133,6 @@ const HomePage = () => {
               )}
             </ul>
           </div>
-        </div>
       )}
     </div>
   );

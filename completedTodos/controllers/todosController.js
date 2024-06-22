@@ -1,9 +1,13 @@
-import axios from 'axios';
+import AxiosFetch from "../../axiosFetch.js";
+
+
+const axiosInstance = new AxiosFetch();
+
 export const completedTodos = async (req, res) => {
     console.log('Request received:', req.body);
     try {
       // Fetch all todos from the first microservice
-      const response = await axios.get('http://localhost:3000/api/todos');
+      const response = await axiosInstance.get('http://localhost:3000/api/todos');
       const todos = response.data;
   
       if (!Array.isArray(todos)) {

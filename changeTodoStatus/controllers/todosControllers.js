@@ -1,4 +1,7 @@
-import axios from "axios";
+import AxiosFetch from "../../axiosFetch.js";
+
+
+const axiosInstance = new AxiosFetch();
 
 export const changeStatusController = async (req, res) => {
   try {
@@ -9,10 +12,7 @@ export const changeStatusController = async (req, res) => {
     console.log("Updating ToDo status with id:", id,completed);
     
     // Send a PUT request to the first microservice to update the ToDo status with id and new status
-    const response = await axios.put("http://localhost:3000/api/todos/update-todo", {
-      id: id,
-      completed: completed,
-    });
+    const response = await axiosInstance.put(`http://localhost:3000/api/todos/update-todo`,  { completed:completed,id:id } );
 
     if (response.status === 200) {
       res.status(200).json(response.data);
