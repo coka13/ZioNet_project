@@ -19,14 +19,11 @@
  1. Send http://localhost:3001/todos/stats GET request using POSTMAN.
  2.  Get results.
 
-![](https://i.imgur.com/IhOmHS0.png)
-
+![](https://i.imgur.com/iznA2zI.png)
 **For updating todo status**
 1. Send http://localhost:3002/todos/status POST request using POSTMAN.
 2. Get results.
 
-![](https://i.imgur.com/GjItw06.png)
-
+![](https://i.imgur.com/8Onz5iL.png)
 **CLIENT**
-
-![[video-to-gif output image]](https://s7.ezgif.com/tmp/ezgif-7-fc22b1a1ad.gif)
+![Animated GIF](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjZmY2p0ZXhqMGp2eHR6bTBza2kzaTlyN2E5YTIwMnE0bTl4YmV1cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QY4n7HKPYb39i9jjQZ/giphy.gif)
