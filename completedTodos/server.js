@@ -8,15 +8,18 @@ const port = 3001;
 
 
 app.use(express.json());
+// Configure CORS middleware with the correct origin
 app.use(cors({
-  origin: 'http://localhost:5173', 
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type'],
 }));
 app.use('/api/todos', todosRoutes);
 
 // Connect to MongoDB
 try{
 
-  mongoose.connect('mongodb://localhost:27017/todos')
+  mongoose.connect('mongodb://mongodb:27017/todos')
 }
 catch(err){
   console.error('MongoDB connection error:', err.message);

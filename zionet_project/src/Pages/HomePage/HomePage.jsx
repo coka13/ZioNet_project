@@ -6,7 +6,7 @@ import './HomePage.css';
 const HomePage = () => {
   const queryClient = useQueryClient();
 
-  // Fetch todos statistics by using the completedTodos microservice which is using DBservice microservice to fetch all todos
+  // Fetch todos statistics from service2
   const { data: todosStats, error: todosStatsError, isLoading: todosStatsLoading } = useQuery({
     queryKey: ['get-todos-stats'],
     queryFn: async () => {
@@ -29,7 +29,7 @@ const HomePage = () => {
     },
   });
 
-  // Fetch all todos by using the DBservice microservice
+  // Fetch all todos from service1
   const { data: allTodos, error: allTodosError, isLoading: allTodosLoading } = useQuery({
     queryKey: ['get-all-todos'],
     queryFn: async () => {
@@ -52,8 +52,7 @@ const HomePage = () => {
     },
   });
 
-
-    // Change todo status (completed/incomplete) by using the ChangeTodoStatus microservice which is using DBservice microservice to update a todo status by id
+  // Mutation to update todo status via service3
   const updateTodoMutation = useMutation({
     mutationFn: async ({ id, completed }) => {
       try {
@@ -84,6 +83,7 @@ const HomePage = () => {
     updateTodoMutation.mutate({ id, completed: !currentStatus });
   };
 
+  // Loading and error handling
   if (todosStatsLoading || allTodosLoading) {
     return <p>Loading...</p>;
   }
@@ -96,43 +96,35 @@ const HomePage = () => {
     return <p>{`Error fetching all todos: ${allTodosError.message}`}</p>;
   }
 
+  // Display fetched data
   return (
     <div className="todo-list">
-
-
       {todosStats && allTodos && (
         <div className="head">
-           <h1>Todo list</h1>
+          <h1>Todo list</h1>
           <div>
             <h6 className="green">Completed Todos: {todosStats.completedTodos}</h6>
             <h6 className="red">Incomplete Todos: {todosStats.incompleteTodos}</h6>
-            
           </div>
             
-            <ul class="list-group">
-              {allTodos.length > 0 ? (
-                allTodos.map((todo,index) => (
-                  <li style={{display:"flex",flexDirection:"column",alignItems:"center",border:"solid"}} class="list-group-item" key={todo._id}>
-
-
-                {todo.completed&& <h5 className="task" ><del> {todo.task}</del></h5>}
-                {!todo.completed && <h5 className="task" >{todo.task}</h5>}
-                    
-
-                    <div className="todo">
-
-                    <h6 className={todo.completed? "green" :"red"}> {todo.completed ? 'Completed' : 'Incomplete'}</h6>
-                    </div>
-                    <button type="button"  class={todo.completed ? "btn btn-danger btn-sm":"btn btn-success btn-sm"} onClick={() => handleToggleCompleted(todo._id, todo.completed)}>
-                      {todo.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
-                    </button>
-                  </li>
-                ))
-              ) : (
-                <li>No todos found</li>
-              )}
-            </ul>
-          </div>
+          <ul className="list-group">
+            {allTodos.length > 0 ? (
+              allTodos.map((todo) => (
+                <li className="list-group-item" key={todo._id}>
+                  <h5 className="task" style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.task}</h5>
+                  <div className="todo">
+                    <h6 className={todo.completed ? "green" : "red"}>{todo.completed ? 'Completed' : 'Incomplete'}</h6>
+                  </div>
+                  <button type="button" className={todo.completed ? "btn btn-danger btn-sm" : "btn btn-success btn-sm"} onClick={() => handleToggleCompleted(todo._id, todo.completed)}>
+                    {todo.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
+                  </button>
+                </li>
+              ))
+            ) : (
+              <li>No todos found</li>
+            )}
+          </ul>
+        </div>
       )}
     </div>
   );

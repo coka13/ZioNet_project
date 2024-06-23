@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  service1:
+    build:
+      context: ./DBservice
+    ports:
+      - "3000:3000"
+    networks:
+      - mynetwork
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongodb:27017/todos
+    depends_on:
+      - mongodb
+ 
+  service2:
+    build:
+      context: ./completedTodos
+    ports:
+      - "3001:3001"
+    networks:
+      - mynetwork
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongodb:27017/todos
+      - SERVICE1_URL=http://service1:3000  # Use service name for internal communication
+    depends_on:
+      - mongodb
+      - service1  # Ensure service1 is ready before starting service2
+
+
+  service3:
+    build:
+      context: ./changeTodoStatus
+    ports:
+      - "3002:3002"
+    networks:
+      - mynetwork
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongodb:27017/todos
+      - SERVICE1_URL=http://service1:3000  # Use service name for internal communication
+    depends_on:
+      - mongodb
+      - service1  # Ensure service1 is ready before starting service3
+
+
+  frontend:
+    build:
+      context: ./zionet_project
+    ports:
+      - "5173:5173"
+    networks:
+      - mynetwork
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - service1  # Ensure service1 is ready before starting frontend
+      - service2  # Ensure service2 is ready before starting frontend
+      - service3  # Ensure service3 is ready before starting frontend
+
+  mongodb:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    networks:
+      - mynetwork
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  mongo-data:

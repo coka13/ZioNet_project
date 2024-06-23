@@ -1,4 +1,4 @@
-import AxiosFetch from "../../axiosFetch.js";
+import AxiosFetch from "../axiosFetch.js";
 
 
 const axiosInstance = new AxiosFetch();
