@@ -1,17 +1,16 @@
 
 
+## Microservices Full Stack Project
 
 **3 Microservices:**
-
 1 - **DBservice** - Microservice to perform DB operations
-
 2 - **completedTodos** - Microservice fetching all todos from DBservice and computing how many todos are completed and how many are incomplete
-
 3 - **changeTodoStatus** - Microservice that gets id and status of a todo and sends a request to DBservice to update todo status (complete/incomplete)
 
 **Added client interface where you can view live how many todos completed/incomplete, view the list of todos and option to change the status by pressing a button.**
 
-**INSTRUCTIONS**
+## **INSTRUCTIONS**
+
  1.  Run from root folder for the first time:
 
     docker-compose down docker-compose up --build
@@ -27,7 +26,7 @@
  
  **Note that each time you re-run the app the DB is reset**
 
-**POSTMAN:**
+## **POSTMAN:**
 
 **For computing how many todos are completed/incompled**
 
@@ -41,6 +40,18 @@
 
 ![](https://i.imgur.com/8Onz5iL.png)
 
-**CLIENT**
+## MongoDB Compass
+
+ 1. Find you local ipv4 address using "ipconfig" in cmd:
+
+![](https://i.imgur.com/KetzBmn.png)
+
+ 1. Insert the address instead of the "localhost":
+ 
+ ![](https://i.imgur.com/mBJld6N.png)
+
+ 
+
+## **CLIENT**
 
 ![Animated GIF](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXV0NmZhb2t4a3gxanF0Y3A3YWt3b3k0ZWx0dHdhN2VneWZ4MWlzOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ukVeiweEdMedzssa1i/giphy.gif)
