@@ -25,6 +25,7 @@
  **Note that each time you re-run the app the DB is reset**
 
 **POSTMAN:**
+
 **For computing how many todos are completed/incompled**
 
  1. Send http://localhost:3001/todos/stats GET request using POSTMAN.
