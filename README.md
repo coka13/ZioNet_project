@@ -22,6 +22,7 @@
  
  ![](https://i.imgur.com/7A8ZZwg.png)
  
+ **Note that each time you re-run the app the DB is reset**
 
 **POSTMAN:**
 **For computing how many todos are completed/incompled**
