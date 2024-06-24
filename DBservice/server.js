@@ -6,9 +6,9 @@ import todosRoutes from './routes/todosRoutes.js'
 
 const app = express();
 const port = 3000;
+const host = '0.0.0.0';
 
 app.use(express.json());
-// Configure CORS middleware with the correct origin
 app.use(cors({
   origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -26,6 +26,5 @@ catch(err){
 }
 
 
-app.listen(port, () => {
-  console.log(`ToDo statistcs Service listening at http://localhost:${port}`);
-});
+app.listen(port, host);
+console.log(`Running on http://${host}:${port}`);

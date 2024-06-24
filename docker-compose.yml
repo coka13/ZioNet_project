@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   service1:
+    image: service1
     build:
       context: ./DBservice
     ports:
@@ -15,6 +16,7 @@ services:
       - mongodb
  
   service2:
+    image: service2
     build:
       context: ./completedTodos
     ports:
@@ -24,13 +26,14 @@ services:
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongodb:27017/todos
-      - SERVICE1_URL=http://service1:3000  # Use service name for internal communication
+      - SERVICE1_URL=http://service1:3000  
     depends_on:
       - mongodb
-      - service1  # Ensure service1 is ready before starting service2
+      - service1 
 
 
   service3:
+    image: service3
     build:
       context: ./changeTodoStatus
     ports:
@@ -40,13 +43,14 @@ services:
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongodb:27017/todos
-      - SERVICE1_URL=http://service1:3000  # Use service name for internal communication
+      - SERVICE1_URL=http://service1:3000  
     depends_on:
       - mongodb
-      - service1  # Ensure service1 is ready before starting service3
+      - service1  
 
 
   frontend:
+    image: front
     build:
       context: ./zionet_project
     ports:

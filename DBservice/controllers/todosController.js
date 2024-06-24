@@ -3,7 +3,8 @@ import { getTodosService, updateTodoService } from "../services/todoServices.js"
 // Get all todos
 export const getTodosController = async (req, res) => {
   try {
-    const todos = await getTodosService(); 
+    const todos = await getTodosService();
+    console.log(todos); 
     if (!todos || todos.length === 0) {
       return res.status(404).json({ error: 'Todos not found' });
     } else {
