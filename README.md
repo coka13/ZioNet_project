@@ -3,8 +3,11 @@
 ## Microservices Full Stack Project
 
 **3 Microservices:**
+
 1 - **DBservice** - Microservice to perform DB operations
+
 2 - **completedTodos** - Microservice fetching all todos from DBservice and computing how many todos are completed and how many are incomplete
+
 3 - **changeTodoStatus** - Microservice that gets id and status of a todo and sends a request to DBservice to update todo status (complete/incomplete)
 
 **Added client interface where you can view live how many todos completed/incomplete, view the list of todos and option to change the status by pressing a button.**
