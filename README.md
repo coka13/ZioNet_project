@@ -50,7 +50,7 @@
 
 ![](https://i.imgur.com/KetzBmn.png)
 
- 1. Insert the address instead of the "localhost":
+ 2. Insert the address instead of the "localhost":
  
  ![](https://i.imgur.com/mBJld6N.png)
 
