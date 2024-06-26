@@ -37,7 +37,7 @@ const HomePage = () => {
   const updateTodoMutation = useMutation({
     mutationFn: async ({ id, completed }) => {
       const response = await fetch(
-        `http://localhost:3002/api/todos/status/${id}`,
+        `http://localhost:3001/api/todos/status/${id}`,
         {
           method: "POST",
           headers: {
@@ -62,7 +62,7 @@ const HomePage = () => {
   const deleteTodoMutation = useMutation({
     mutationFn: async (id) => {
       const response = await fetch(
-        `http://localhost:3003/api/todos/deleteTodo/${id}`,
+        `http://localhost:3001/api/todos/deleteTodo/${id}`,
         {
           method: "POST",
           headers: {
@@ -92,7 +92,7 @@ const HomePage = () => {
 
   const handleSaveTodo = async () => {
     try {
-      const response = await fetch("http://localhost:3003/api/todos/addTodo", {
+      const response = await fetch("http://localhost:3001/api/todos/addTodo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

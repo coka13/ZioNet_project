@@ -18,7 +18,7 @@ services:
   service2:
     image: service2
     build:
-      context: ./completedTodos
+      context: ./managerService
     ports:
       - "3001:3001"
     networks:
@@ -30,40 +30,6 @@ services:
     depends_on:
       - mongodb
       - service1 
-
-
-  service3:
-    image: service3
-    build:
-      context: ./changeTodoStatus
-    ports:
-      - "3002:3002"
-    networks:
-      - mynetwork
-    environment:
-      - NODE_ENV=production
-      - MONGO_URI=mongodb://mongodb:27017/todos
-      - SERVICE1_URL=http://service1:3000  
-    depends_on:
-      - mongodb
-      - service1  
-
-
-  service4:
-    image: service4
-    build:
-      context: ./addDeleteTodo
-    ports:
-      - "3003:3003"
-    networks:
-      - mynetwork
-    environment:
-      - NODE_ENV=production
-      - MONGO_URI=mongodb://mongodb:27017/todos
-      - SERVICE1_URL=http://service1:3000  
-    depends_on:
-      - mongodb
-      - service1  
 
 
   frontend:
@@ -79,8 +45,7 @@ services:
     depends_on:
       - service1  # Ensure service1 is ready before starting frontend
       - service2  # Ensure service2 is ready before starting frontend
-      - service3  # Ensure service3 is ready before starting frontend
-      - service4  # Ensure service3 is ready before starting frontend
+
 
   mongodb:
     image: mongo:4.4
