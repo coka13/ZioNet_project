@@ -11,7 +11,7 @@ import { sendMail } from './lib/mailer/sendMail.js';
 dotenv.config(); // dotenv.config() helps fetch .env variables
 const app = express();
 const port = 3000;
-const host = 'localhost';
+const host = '0.0.0.0';
 
 app.use(express.json());
 app.use(cors({
@@ -24,7 +24,7 @@ app.use('/api/todos', todosRoutes);
 
 // Connect to MongoDB
 try{
-  mongoose.connect('mongodb://localhost:27017/todos')
+  mongoose.connect('mongodb://mongodb:27017/todos')
 }
 catch(err){
   console.error('MongoDB connection error:', err.message);

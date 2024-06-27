@@ -5,7 +5,7 @@ import todosRoutes from './routes/todosRoutes.js'
 
 const app = express();
 const port = 3001;
-const host = 'localhost';
+const host = '0.0.0.0';
 
 
 app.use(express.json());
@@ -19,7 +19,7 @@ app.use('/api/todos', todosRoutes);
 // Connect to MongoDB
 try{
 
-  mongoose.connect('mongodb://localhost:27017/todos')
+  mongoose.connect('mongodb://mongodb:27017/todos')
 }
 catch(err){
   console.error('MongoDB connection error:', err.message);

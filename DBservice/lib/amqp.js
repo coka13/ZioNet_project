@@ -1,9 +1,9 @@
-import amqlib from 'amqplib';
+import amqplib from 'amqplib';
 
 export const connectQueue= async () => {
     try {
         // Connect to the RabbitMQ server
-        const connection = await amqlib.connect(process.env.AMQP_URL);
+        let connection = await amqplib.connect(process.env.RABBITMQ_URL);
         // Create a channel
         const channel = await connection.createChannel();
         // Create a queue

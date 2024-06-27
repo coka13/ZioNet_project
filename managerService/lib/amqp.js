@@ -1,10 +1,12 @@
 import amqplib from "amqplib";
 
+
 async function connectQueue(){
     try {
-        let connection = await amqplib.connect('amqp://localhost');
+        let connection = await amqplib.connect(process.env.RABBITMQ_URL);
+
         let channel = await connection.createChannel();
-        await channel.assertQueue(process.env.QUEUE_NAME,{ noAck:false });
+        await channel.assertQueue(process.env.RABBITMQ_URL,{ noAck:false });
         console.log('Queue connected!')
 
         return channel;

@@ -1,6 +1,6 @@
 import AxiosFetch from "../axiosFetch.js";
 import connectQueue from "../lib/amqp.js";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config(); // fetch .env variables
 const axiosInstance = new AxiosFetch();
@@ -10,7 +10,7 @@ export const completedTodos = async (req, res) => {
   try {
     // Fetch all todos from the first microservice
     const response = await axiosInstance.get(
-      `http://localhost:3000/api/todos`
+      `${process.env.SERVICE1_URL}/api/todos`
     );
     const todos = response.data;
 
@@ -55,7 +55,7 @@ export const changeStatusController = async (req, res) => {
 
     let channel = await connectQueue();
 
-    let data = { "id": id, "completed": completed, "action": "update" };
+    let data = { id: id, completed: completed, action: "update" };
 
     // Producer method, will create rabbitmq jobs
     channel.sendToQueue(
@@ -82,7 +82,7 @@ export const addNewTodoController = async (req, res) => {
 
     let channel = await connectQueue();
 
-    let data = { "task": task, "action": "add" };
+    let data = { task: task, action: "add" };
 
     // Producer method, will create rabbitmq jobs
     channel.sendToQueue(
@@ -103,7 +103,7 @@ export const deleteTodoController = async (req, res) => {
     const { id } = req.params;
     console.log("Deleting ToDo with id:", id);
     let channel = await connectQueue();
-    let data = { "id": id, "action": "delete" };
+    let data = { id: id, action: "delete" };
 
     // Producer method, will create rabbitmq jobs
     channel.sendToQueue(

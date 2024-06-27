@@ -12,9 +12,11 @@ services:
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongodb:27017/todos
+      - RABBITMQ_URL=amqp://rabbitmq:5672
       - QUEUE_NAME = todoQueue
     depends_on:
       - mongodb
+      - rabbitmq
  
   service2:
     image: service2
@@ -28,11 +30,12 @@ services:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongodb:27017/todos
       - SERVICE1_URL=http://service1:3000  
+      - RABBITMQ_URL=amqp://rabbitmq:5672
       - QUEUE_NAME = todoQueue
     depends_on:
       - mongodb
-      - service1 
-
+      - service1
+      - rabbitmq
 
   frontend:
     image: front
@@ -48,7 +51,6 @@ services:
       - service1  # Ensure service1 is ready before starting frontend
       - service2  # Ensure service2 is ready before starting frontend
 
-
   mongodb:
     image: mongo:4.4
     ports:
@@ -57,6 +59,14 @@ services:
       - mynetwork
     volumes:
       - mongo-data:/data/db
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"  # RabbitMQ AMQP port
+      - "15672:15672"  # RabbitMQ management UI port
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:
