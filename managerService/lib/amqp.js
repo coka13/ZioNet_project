@@ -1,18 +1,17 @@
-import amqplib from "amqplib";
+import amqplib from 'amqplib';
 
-
-async function connectQueue(){
+export const connectQueue= async () => {
     try {
+        // Connect to the RabbitMQ server
         let connection = await amqplib.connect(process.env.RABBITMQ_URL);
-
-        let channel = await connection.createChannel();
-        await channel.assertQueue(process.env.RABBITMQ_URL,{ noAck:false });
-        console.log('Queue connected!')
-
+        // Create a channel
+        const channel = await connection.createChannel();
+        // Create a queue
+        await channel.assertQueue(process.env.QUEUE_NAME);
+        console.log('Connected to the queue');
         return channel;
     } catch (error) {
-        console.error('Queue error',error.message)
+        console.error('Error occurred:', error.message);
     }
-}
-
-export default connectQueue;
+    };
+    

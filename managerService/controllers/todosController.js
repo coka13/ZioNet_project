@@ -1,5 +1,5 @@
 import AxiosFetch from "../axiosFetch.js";
-import connectQueue from "../lib/amqp.js";
+import { connectQueue } from "../lib/amqp.js";
 import dotenv from "dotenv";
 
 dotenv.config(); // fetch .env variables

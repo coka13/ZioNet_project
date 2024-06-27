@@ -22,6 +22,8 @@ app.use(cors({
 
 app.use('/api/todos', todosRoutes);
 
+console.log(process.env.QUEUE_NAME,"Queue name");
+
 // Connect to MongoDB
 try{
   mongoose.connect('mongodb://mongodb:27017/todos')
@@ -35,6 +37,7 @@ try{
 
   // Queue consumer. Will execute all created jobs.
   channel.consume(process.env.QUEUE_NAME, async( data )=>{
+    console.log('Message received:', data);
     if( data !== null ){
         let msg = data.content.toString(); // Convert buffer to string
         msg = JSON.parse(msg); // convert string to JSON object
