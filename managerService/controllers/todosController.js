@@ -1,6 +1,8 @@
 import AxiosFetch from "../axiosFetch.js";
 import connectQueue from "../lib/amqp.js";
+import dotenv from 'dotenv';
 
+dotenv.config(); // fetch .env variables
 const axiosInstance = new AxiosFetch();
 
 export const completedTodos = async (req, res) => {
@@ -109,7 +111,7 @@ export const deleteTodoController = async (req, res) => {
       Buffer.from(JSON.stringify(data))
     );
 
-    res.status(200).json({ data: task });
+    res.status(200).json({ data: id });
   } catch (err) {
     console.error("Error occurred:", err.message);
     res.status(500).json({ error: "An error occurred while deleting ToDo" });

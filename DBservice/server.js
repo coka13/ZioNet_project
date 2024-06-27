@@ -4,11 +4,11 @@ import cors from 'cors';
 import todosRoutes from './routes/todosRoutes.js'
 import dotenv from 'dotenv';
 import { connectQueue } from './lib/amqp.js';
-import { addTodoService, updateTodoService } from './services/todoServices.js';
+import { addTodoService, deleteTodoByIDService, updateTodoService } from './services/todoServices.js';
 import { sendMail } from './lib/mailer/sendMail.js';
 
 
-
+dotenv.config(); // dotenv.config() helps fetch .env variables
 const app = express();
 const port = 3000;
 const host = 'localhost';
@@ -40,7 +40,7 @@ try{
         msg = JSON.parse(msg); // convert string to JSON object
 
         let status = {};
-
+        console.log('Message received:', msg);
         switch( msg.action ){
           case 'add':
             status = await addTodoService(msg.task);

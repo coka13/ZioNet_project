@@ -11,8 +11,8 @@ let mailer = nodemailer.createTransport({
 
 export const  sendMail = async ( email )=>{
     await mailer.sendMail({
-        from: 'order@makemyorder.com', 
-        to: "customer@gmail.com",
+        from: 'admin@admin.com', 
+        to: "userr@gmail.com",
         subject: "Action completed", 
         text: email,
         html:`<h1>Action completed</h1><p>${nl2br(email)}</p>`
