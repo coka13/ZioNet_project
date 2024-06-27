@@ -12,6 +12,7 @@ services:
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongodb:27017/todos
+      - QUEUE_NAME = todoQueue
     depends_on:
       - mongodb
  
@@ -27,6 +28,7 @@ services:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongodb:27017/todos
       - SERVICE1_URL=http://service1:3000  
+      - QUEUE_NAME = todoQueue
     depends_on:
       - mongodb
       - service1 

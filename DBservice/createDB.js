@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Todo } from "./model.js";
 
-const MONGO_URI = "mongodb://mongodb:27017/todos";
+const MONGO_URI = "mongodb://localhost:27017/todos";
 
 const connectToMongoDB = async () => {
   try {
