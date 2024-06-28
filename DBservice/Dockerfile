@@ -13,13 +13,19 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Expose the port (if needed)
+# Add wait-for-it script
+COPY wait-for-it.sh /app/wait-for-it.sh
+RUN chmod +x /app/wait-for-it.sh
+
+# Add entrypoint script
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+# Expose the port
 EXPOSE 3000
 
-# Define an entrypoint script to run on container startup
-COPY entrypoint.sh /usr/src/app/entrypoint.sh
-RUN chmod +x /usr/src/app/entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+# Define the entrypoint script
+ENTRYPOINT ["/app/entrypoint.sh"]
 
-# Start the application (if needed)
+# Command to start the application
 CMD ["npm", "start"]
