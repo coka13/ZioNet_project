@@ -69,26 +69,9 @@ services:
     networks:
       - mynetwork
 
-
-  smtp4dev:
-    image: rnwood/smtp4dev
-    ports:
-      - "5000:80"   # Expose smtp4dev web UI on port 5000 of the host
-      - "25:25"     # Expose SMTP port 25 of smtp4dev
-      - "143:143"   # Expose IMAP port 143 of smtp4dev (for viewing emails)
-    volumes:
-      - ./path/to/save/messages:/var/mail
-    environment:
-      - DBTYPE=SQlite
-    restart: unless-stopped
-    networks:
-      - mynetwork
-
-   
 networks:
   mynetwork:
     driver: bridge
 
 volumes:
   mongo-data:
-

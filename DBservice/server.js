@@ -32,15 +32,6 @@ catch(err){
   console.error('MongoDB connection error:', err.message);
 }
 
-
-
-
-
-
-
-
-
-
 try{
   let channel = await connectQueue();
 
@@ -50,25 +41,25 @@ try{
     if( data !== null ){
         let msg = data.content.toString(); // Convert buffer to string
         msg = JSON.parse(msg); // convert string to JSON object
+
         let status = {};
         console.log('Message received:', msg);
         switch( msg.action ){
           case 'add':
             status = await addTodoService(msg.task);
-            await sendMail(`Your todo was added \n Todo:${status.task}`);
-
+            await sendMail(`Your do was added \n Todo:${msg.task}`);
             console.log('Status',status);
             channel.ack(data); // Use channel and data ( arg received in callback )
             break;
           case 'update':
             status = await updateTodoService(msg.id, msg.completed);
-            await sendMail(`Your todo was updated \n Todo:${status.task}`);
+            await sendMail(`Your do was updated \n Todo:${msg.task}`);
             console.log('Status',status);
             channel.ack(data);
             break;
           case 'delete':
             status = await deleteTodoByIDService(msg.id);
-            await sendMail(`Your todo was deleted \n Todo:${status.task}`);
+            await sendMail(`Your todo was deleted \n Todo:${msg.task}`);
             console.log('Status',status);
             channel.ack(data);
             break;
